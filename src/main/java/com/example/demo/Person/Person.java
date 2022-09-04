@@ -1,10 +1,33 @@
 package com.example.demo.Person;
 
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
+
+@Entity
+@Table
 public class Person {
+    @Id
+    @SequenceGenerator(
+            name = "person_sequence",
+            sequenceName = "person_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "person_sequence"
+    )
     private Long Id;
     private String Email;
     private float WithdrawalRate;
     private float GrowthRate;
+
+    public Person() {
+    }
 
     public Person(Long Id,
                   String Email,
