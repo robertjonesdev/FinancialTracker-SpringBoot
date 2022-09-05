@@ -16,3 +16,7 @@ Spring Boot Rest API
      - Update (PUT:id)
      - Remove (DELETE:id)
  - Swagger UI
+
+
+### env.properties
+An env.properties.example file is provided. Rename this file to env.properties and set your PostgreSQL database name, username, and password.
