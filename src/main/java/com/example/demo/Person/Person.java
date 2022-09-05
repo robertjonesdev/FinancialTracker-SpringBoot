@@ -35,16 +35,32 @@ public class Person {
                   float GrowthRate) {
         this.Id = Id;
         this.Email = Email;
-        this.WithdrawalRate = WithdrawalRate;
-        this.GrowthRate = GrowthRate;
+        if (WithdrawalRate > 0f) {
+            this.WithdrawalRate = WithdrawalRate;
+        } else {
+            this.WithdrawalRate = 4.0f;
+        }
+        if (GrowthRate > 0f) {
+            this.GrowthRate = GrowthRate;
+        } else {
+            this.GrowthRate = 7.0f;
+        }
     }
 
     public Person(String email,
                   float withdrawalRate,
                   float growthRate) {
-        Email = email;
-        WithdrawalRate = withdrawalRate;
-        GrowthRate = growthRate;
+        this.Email = email;
+        if (WithdrawalRate > 0f) {
+            this.WithdrawalRate = WithdrawalRate;
+        } else {
+            this.WithdrawalRate = 4.0f;
+        }
+        if (GrowthRate > 0f) {
+            this.GrowthRate = GrowthRate;
+        } else {
+            this.GrowthRate = 7.0f;
+        }
     }
 
     public Long getId() {
@@ -68,7 +84,11 @@ public class Person {
     }
 
     public void setWithdrawalRate(float withdrawalRate) {
-        WithdrawalRate = withdrawalRate;
+        if (withdrawalRate > 0f) {
+            WithdrawalRate = withdrawalRate;
+        } else {
+            WithdrawalRate = 4.0f;
+        }
     }
 
     public float getGrowthRate() {
@@ -76,7 +96,11 @@ public class Person {
     }
 
     public void setGrowthRate(float growthRate) {
-        GrowthRate = growthRate;
+        if (growthRate > 0f) {
+            GrowthRate = growthRate;
+        } else {
+            GrowthRate = 7.0f;
+        }
     }
 
     @Override

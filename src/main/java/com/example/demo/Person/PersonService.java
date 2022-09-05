@@ -3,7 +3,9 @@ package com.example.demo.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -39,5 +41,34 @@ public class PersonService {
         }
         personRepository.deleteById(personId);
 
+    }
+
+    @Transactional
+    public void updatePerson(Long personId,
+                             String email,
+                             float WithdrawalRate,
+                             float GrowthRate) {
+        Person person = personRepository.findById(personId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "person with id " + personId + " does not exist"
+                ));
+
+        if (email != null &&
+                email.length() > 0 &&
+                !Objects.equals(person.getEmail(), email)) {
+            Optional<Person> personOptional = personRepository
+                    .findPersonByEmail(email);
+            if (personOptional.isPresent()) {
+                throw new IllegalStateException("Email taken");
+            }
+            person.setEmail(email);
+        }
+        if (WithdrawalRate > 0.0f) {
+            person.setWithdrawalRate(WithdrawalRate);
+        }
+
+        if (GrowthRate > 0.0f) {
+            person.setGrowthRate(GrowthRate);
+        }
     }
 }
