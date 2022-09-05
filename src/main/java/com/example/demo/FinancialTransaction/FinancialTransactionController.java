@@ -22,4 +22,8 @@ public class FinancialTransactionController {
     public List<FinancialTransaction> getTransactions() {
         return transactionService.getTransactions();
     }
+
+    public void registerNewFinancialTransaction ( FinancialTransaction transaction) {
+        transactionService.getTransactions();
+    }
 }
