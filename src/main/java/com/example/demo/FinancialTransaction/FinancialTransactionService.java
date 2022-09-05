@@ -22,9 +22,12 @@ public class FinancialTransactionService {
         return repository.findAll();
     }
 
+    public List<FinancialTransaction> getTransactionsByPersonId(Long personId) {
+        return repository.selectTransactionByPersonId(personId);
+    }
 
     public void addNewTransaction(FinancialTransaction transaction) {
-        Optional<FinancialTransaction> transactionOptional = repository.findByMonth(transaction.getMonth(), transaction.getPersonId());
+        Optional<FinancialTransaction> transactionOptional = repository.findByMonth(transaction.getMonth());
 
         if(transactionOptional.isPresent()) {
             throw new IllegalStateException("Transaction for this month already exists.");

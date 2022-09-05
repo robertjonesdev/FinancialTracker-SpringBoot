@@ -15,6 +15,8 @@ Spring Boot Rest API
      - Add (POST)
      - Update (PUT:id)
      - Remove (DELETE:id)
+ - Database relationships
+   - Person has a One-To-Many relationship with FinancialTransactions.
  - Swagger UI
 
 

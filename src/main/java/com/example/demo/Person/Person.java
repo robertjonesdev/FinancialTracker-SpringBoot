@@ -1,12 +1,12 @@
 package com.example.demo.Person;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.SequenceGenerator;
+import com.example.demo.FinancialTransaction.FinancialTransaction;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -26,6 +26,16 @@ public class Person {
     private Float WithdrawalRate;
     private Float GrowthRate;
 
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "Person",
+            orphanRemoval = true,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
+    )
+    private List<FinancialTransaction> transactions= new ArrayList<>();
+
+
     public Person() {
     }
 
@@ -35,12 +45,12 @@ public class Person {
                   Float GrowthRate) {
         this.Id = Id;
         this.Email = Email;
-        if (WithdrawalRate > 0f) {
+        if (WithdrawalRate == null || WithdrawalRate > 0f) {
             this.WithdrawalRate = WithdrawalRate;
         } else {
             this.WithdrawalRate = 4.0f;
         }
-        if (GrowthRate > 0f) {
+        if (GrowthRate == null || GrowthRate > 0f) {
             this.GrowthRate = GrowthRate;
         } else {
             this.GrowthRate = 7.0f;
@@ -51,12 +61,12 @@ public class Person {
                   Float withdrawalRate,
                   Float growthRate) {
         this.Email = email;
-        if (withdrawalRate > 0f) {
+        if (withdrawalRate == null || withdrawalRate > 0f) {
             this.WithdrawalRate = withdrawalRate;
         } else {
             this.WithdrawalRate = 4.0f;
         }
-        if (growthRate > 0f) {
+        if (growthRate == null || growthRate > 0f) {
             this.GrowthRate = growthRate;
         } else {
             this.GrowthRate = 7.0f;
@@ -100,6 +110,24 @@ public class Person {
             GrowthRate = growthRate;
         } else {
             GrowthRate = 7.0f;
+        }
+    }
+
+    public List<FinancialTransaction> getTransactions() {
+        return transactions;
+    }
+
+    public void addTransaction(FinancialTransaction transaction) {
+        if (!this.transactions.contains(transaction)) {
+            this.transactions.add(transaction);
+            transaction.setPerson(this);
+        }
+    }
+
+    public void removeTransaction(FinancialTransaction transaction) {
+        if (this.transactions.contains(transaction)) {
+            this.transactions.remove(transaction);
+            transaction.setPerson(null);
         }
     }
 

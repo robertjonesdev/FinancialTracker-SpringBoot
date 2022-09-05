@@ -1,11 +1,9 @@
 package com.example.demo.FinancialTransaction;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.SequenceGenerator;
+import com.example.demo.Person.Person;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 @Entity
 @Table
@@ -25,25 +23,29 @@ public class FinancialTransaction {
     private Long NetWorth;
     private Long Savings;
     private Long Expenses;
-    private Long PersonId;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="person_id",
+            referencedColumnName="id",
+            foreignKey = @ForeignKey(
+                    name = "person_transaction_fk"
+            )
+    )
+    private Person Person;
+
     public FinancialTransaction() {
+
     }
 
-    public FinancialTransaction(Long id, LocalDate month, Long netWorth, Long savings, Long expenses, Long personId) {
-        Id = id;
+    public FinancialTransaction(LocalDate month,
+                                Long netWorth,
+                                Long savings,
+                                Long expenses) {
         Month = month;
         NetWorth = netWorth;
         Savings = savings;
         Expenses = expenses;
-        PersonId = personId;
-    }
-
-    public FinancialTransaction(LocalDate month, Long netWorth, Long savings, Long expenses, Long personId) {
-        Month = month;
-        NetWorth = netWorth;
-        Savings = savings;
-        Expenses = expenses;
-        PersonId = personId;
     }
 
     public Long getId() {
@@ -86,12 +88,15 @@ public class FinancialTransaction {
         Expenses = expenses;
     }
 
-    public Long getPersonId() {
-        return PersonId;
+    public void setPerson(Person person) {
+        Person = person;
     }
 
-    public void setPersonId(Long personId) {
-        PersonId = personId;
+    public Person getPerson() {
+        return Person;
+    }
+    public Long getPersonId() {
+        return Person.getId();
     }
 
     @Override
@@ -102,7 +107,7 @@ public class FinancialTransaction {
                 ", NetWorth=" + NetWorth +
                 ", Savings=" + Savings +
                 ", Expenses=" + Expenses +
-                ", PersonId=" + PersonId +
+                ", Person=" + Person +
                 '}';
     }
 }

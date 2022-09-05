@@ -23,6 +23,12 @@ public class FinancialTransactionController {
         return transactionService.getTransactions();
     }
 
+    @GetMapping(path = "person/{personId}")
+    public List<FinancialTransaction> getTransactionsByPersonId(
+            @PathVariable("personId") Long personId) {
+        return transactionService.getTransactionsByPersonId(personId);
+    }
+
     @PostMapping
     public void registerNewFinancialTransaction(@RequestBody FinancialTransaction transaction) {
         transactionService.addNewTransaction(transaction);

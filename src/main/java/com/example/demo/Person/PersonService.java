@@ -21,6 +21,10 @@ public class PersonService {
             return personRepository.findAll();
     }
 
+    public Optional<Person> getPersonById(Long personId) {
+        return personRepository.findById(personId);
+    }
+
     public void addNewPerson(Person person) {
         Optional<Person> personOptional = personRepository.findPersonByEmail(person.getEmail());
 
@@ -71,4 +75,6 @@ public class PersonService {
             person.setGrowthRate(GrowthRate);
         }
     }
+
+
 }
