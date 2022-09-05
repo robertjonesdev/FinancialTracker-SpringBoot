@@ -25,7 +25,6 @@ public class FinancialTransaction {
     private Long NetWorth;
     private Long Savings;
     private Long Expenses;
-
     private Long PersonId;
     public FinancialTransaction() {
     }

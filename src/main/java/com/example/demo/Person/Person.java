@@ -23,16 +23,16 @@ public class Person {
     )
     private Long Id;
     private String Email;
-    private float WithdrawalRate;
-    private float GrowthRate;
+    private Float WithdrawalRate;
+    private Float GrowthRate;
 
     public Person() {
     }
 
     public Person(Long Id,
                   String Email,
-                  float WithdrawalRate,
-                  float GrowthRate) {
+                  Float WithdrawalRate,
+                  Float GrowthRate) {
         this.Id = Id;
         this.Email = Email;
         if (WithdrawalRate > 0f) {
@@ -48,16 +48,16 @@ public class Person {
     }
 
     public Person(String email,
-                  float withdrawalRate,
-                  float growthRate) {
+                  Float withdrawalRate,
+                  Float growthRate) {
         this.Email = email;
-        if (WithdrawalRate > 0f) {
-            this.WithdrawalRate = WithdrawalRate;
+        if (withdrawalRate > 0f) {
+            this.WithdrawalRate = withdrawalRate;
         } else {
             this.WithdrawalRate = 4.0f;
         }
-        if (GrowthRate > 0f) {
-            this.GrowthRate = GrowthRate;
+        if (growthRate > 0f) {
+            this.GrowthRate = growthRate;
         } else {
             this.GrowthRate = 7.0f;
         }
@@ -79,11 +79,11 @@ public class Person {
         Email = email;
     }
 
-    public float getWithdrawalRate() {
+    public Float getWithdrawalRate() {
         return WithdrawalRate;
     }
 
-    public void setWithdrawalRate(float withdrawalRate) {
+    public void setWithdrawalRate(Float withdrawalRate) {
         if (withdrawalRate > 0f) {
             WithdrawalRate = withdrawalRate;
         } else {
@@ -91,11 +91,11 @@ public class Person {
         }
     }
 
-    public float getGrowthRate() {
+    public Float getGrowthRate() {
         return GrowthRate;
     }
 
-    public void setGrowthRate(float growthRate) {
+    public void setGrowthRate(Float growthRate) {
         if (growthRate > 0f) {
             GrowthRate = growthRate;
         } else {

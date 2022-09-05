@@ -46,8 +46,8 @@ public class PersonService {
     @Transactional
     public void updatePerson(Long personId,
                              String email,
-                             float WithdrawalRate,
-                             float GrowthRate) {
+                             Float WithdrawalRate,
+                             Float GrowthRate) {
         Person person = personRepository.findById(personId)
                 .orElseThrow(() -> new IllegalStateException(
                         "person with id " + personId + " does not exist"
@@ -63,11 +63,11 @@ public class PersonService {
             }
             person.setEmail(email);
         }
-        if (WithdrawalRate > 0.0f) {
+        if (WithdrawalRate != null && WithdrawalRate > 0.0f) {
             person.setWithdrawalRate(WithdrawalRate);
         }
 
-        if (GrowthRate > 0.0f) {
+        if (GrowthRate != null && GrowthRate > 0.0f) {
             person.setGrowthRate(GrowthRate);
         }
     }

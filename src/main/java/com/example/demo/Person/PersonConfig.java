@@ -12,7 +12,7 @@ public class PersonConfig {
     CommandLineRunner pCommandLineRunner(PersonRepository repository) {
         return args -> {
             Person robert = new Person(
-                    "robert@robertjones.dev",
+                    "robert@robertj ones.dev",
                     4.0f,
                     7.0f
             );
