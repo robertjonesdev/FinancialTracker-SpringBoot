@@ -3,6 +3,8 @@ Robert Jones
 
 Spring Boot Rest API
 
+Live example: https://frozen-garden-64177.herokuapp.com/swagger-ui.html
+
  - PostgreSQL Database
  - Rest API endpoints:
    - Person ('api/v1/person')
